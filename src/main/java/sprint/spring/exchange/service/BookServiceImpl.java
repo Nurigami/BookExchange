@@ -23,8 +23,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book changeBook(Book book, Long id) {
-        Book bookUpdate = bookRepository.findById(id).get();
+    public Book changeBook(Book book) {
+        Book bookUpdate = bookRepository.findById(book.getId()).get();
+        //логика апдейта должна прописываться здесь
+        //здесь дополнительно айди не стоит передавать в параметрах, я его удалила
+        //сделай плз проверку на нул здесь и в гетБайАйди, если его ловит то сообщение типа "такого айди не существует",
+        //и это сообщение нужно в модельке возвращать, а не просто строкой и на уровне контролера его засунуть в респонсэнтити
         return bookRepository.save(bookUpdate);
     }
 

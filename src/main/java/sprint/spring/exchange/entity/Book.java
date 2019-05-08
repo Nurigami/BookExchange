@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long bookId;
+    private Long id;
     private String name;
     private String description;
     private String author;
@@ -27,12 +27,12 @@ public class Book {
         this.isBooked = isBooked;
     }
 
-    public Long getBookId() {
-        return bookId;
+    public Long getId() {
+        return id;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

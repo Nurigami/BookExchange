@@ -11,41 +11,34 @@ import sprint.spring.exchange.service.BookService;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/book")
+@RequestMapping("/exchange/book")
 public class BookController {
     @Autowired
     private BookService bookService;
-
-    @PostMapping("/addBook")
-    @ResponseStatus(HttpStatus.CREATED)
+    //лишние пути я убрала, так неудобно будет самим ориентироваться
+    //оберни плз все ответы в респонсэнтити, в эддбук в респонсэтити еще локейшн нужно создать
+    @PostMapping
     public Book addBook(@RequestBody Book book) {
         return bookService.addBook(book);
     }
 
-    @DeleteMapping("/removeBook/{id}")
+    @DeleteMapping("/{id}")
     public void removeBook(@PathVariable Long id) {
         bookService.removeBook(id);
     }
 
-    @PutMapping("/updateBook/{id}")
-    public ResponseEntity<?> updateBook(@RequestBody Book book, @PathVariable Long id) {
-        Book currentBook = bookService.changeBook(book, id);
-        currentBook.setName(book.getName());
-        currentBook.setDescription(book.getDescription());
-        currentBook.setAuthor(book.getAuthor());
-        currentBook.setCategory(book.getCategory());
-        currentBook.setUser(book.getUser());
-        currentBook.setBooked(book.getBooked());
-        bookService.changeBook(currentBook, id);
+    @PutMapping
+    public ResponseEntity<?> updateBook(@RequestBody Book book) {
+        Book currentBook = bookService.changeBook(book);
         return new ResponseEntity<Book>(currentBook, HttpStatus.OK);
     }
 
-    @GetMapping("/book")
+    @GetMapping
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("/book/{id}")
+    @GetMapping("/{id}")
     public Book getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
