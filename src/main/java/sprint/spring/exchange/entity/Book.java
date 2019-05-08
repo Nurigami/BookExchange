@@ -6,37 +6,33 @@ import javax.persistence.*;
 @Table(name = "z_book")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long bookId;
     private String name;
     private String description;
     private String author;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String terms;
+    private String login;
     private Boolean isBooked;
 
     public Book() {
     }
 
-    public Book(String name, String description, String author, Category category, User user, Boolean isBooked) {
+    public Book(String name, String description, String author, String terms, String login, Boolean isBooked) {
         this.name = name;
         this.description = description;
         this.author = author;
-        this.category = category;
-        this.user = user;
+        this.terms = terms;
+        this.login = login;
         this.isBooked = isBooked;
     }
 
-    public Long getId() {
-        return id;
+    public Long getBookId() {
+        return bookId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setBookId(Long bookId) {
+        this.bookId = bookId;
     }
 
     public String getName() {
@@ -63,20 +59,20 @@ public class Book {
         this.author = author;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getTerms() {
+        return terms;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setTerms(String terms) {
+        this.terms = terms;
     }
 
-    public User getUser() {
-        return user;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public Boolean getBooked() {
