@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "z_journal")
-public class Journal {
+public class Receiving {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -14,6 +14,7 @@ public class Journal {
     private Category category;
     @Column(name = "giv_login")
     private String login;
+    private LocalDateTime datePosted;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id")
     private Book book;
@@ -21,12 +22,22 @@ public class Journal {
     private String recLogin;
     private LocalDateTime dateBooked;
 
-    public Journal() {
+    public Receiving() {
     }
 
-    public Journal(Category category, String login, Book book, String recLogin, LocalDateTime dateBooked) {
+    public Receiving(Post post, String recLogin){
+        this.category = post.getCategory();
+        this.login = post.getUser().getLogin();
+        this.datePosted = post.getDatePosted();
+        this.book = post.getBook();
+        this.recLogin = recLogin;
+        this.dateBooked = LocalDateTime.now();
+    }
+
+    public Receiving(Category category, String login, LocalDateTime datePosted, Book book, String recLogin) {
         this.category = category;
         this.login = login;
+        this.datePosted = datePosted;
         this.book = book;
         this.recLogin = recLogin;
         this.dateBooked = LocalDateTime.now();
@@ -54,6 +65,14 @@ public class Journal {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public LocalDateTime getDatePosted() {
+        return datePosted;
+    }
+
+    public void setDatePosted(LocalDateTime datePosted) {
+        this.datePosted = datePosted;
     }
 
     public Book getBook() {

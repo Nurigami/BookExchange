@@ -13,16 +13,18 @@ public class User {
     private String password;
     private String email;
     private String phone;
+    private String address;
 
     public User() {
     }
 
-    public User(String fio, String login, String password, String email, String phone) {
+    public User(String fio, String login, String password, String email, String phone, String address) {
         this.fio = fio;
         this.login = login;
         this.password = password;
         this.email = email;
         this.phone = phone;
+        this.address = address;
     }
 
     public Long getId() {
@@ -73,4 +75,11 @@ public class User {
         this.phone = phone;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
