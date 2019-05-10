@@ -14,17 +14,21 @@ public class User {
     private String email;
     private String phone;
     private String address;
+    @Column(name = "is_active", columnDefinition = "boolean default true")
+    private Boolean isActive;
 
     public User() {
     }
 
-    public User(String fio, String login, String password, String email, String phone, String address) {
+    public User(String fio, String login, String password, String email,
+                String phone, String address, Boolean isActive) {
         this.fio = fio;
         this.login = login;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.isActive = isActive;
     }
 
     public Long getId() {
@@ -81,5 +85,13 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 }
