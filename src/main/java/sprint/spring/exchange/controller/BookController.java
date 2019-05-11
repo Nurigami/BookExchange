@@ -37,15 +37,17 @@ public class BookController {
         return new ResponseEntity<>(bookService.updateBook(book),HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Message> deleteBook(@PathVariable Long id){
-        return new ResponseEntity<>(bookService.deleteBook(id),HttpStatus.OK);
-    }
-
     @GetMapping("/search")
     public ResponseEntity <List<Book>> getBooksByNameAndAuthor(@RequestHeader(required = false) String name,
                                                                @RequestHeader (required = false) String author) {
 
         return new ResponseEntity< >(bookService.getBooksByNameAndAuthor(name,author),HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Message> deleteBook(@PathVariable Long id){
+        return new ResponseEntity<>(bookService.deleteBook(id),HttpStatus.OK);
+    }
+
+
 }
