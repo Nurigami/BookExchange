@@ -6,7 +6,8 @@ import sprint.spring.exchange.entity.Book;
 import sprint.spring.exchange.entity.Category;
 import sprint.spring.exchange.entity.Post;
 import sprint.spring.exchange.entity.User;
-import sprint.spring.exchange.model.JsonMsg;
+import sprint.spring.exchange.model.Message;
+import sprint.spring.exchange.model.PostModel;
 import sprint.spring.exchange.repository.PostRepository;
 
 import java.util.List;
@@ -14,42 +15,39 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
     @Autowired
+    private CategoryService categoryService;
+    @Autowired
     private BookService bookService;
     @Autowired
-    private CategoryService categoryService;
+    private UserService userService;
     @Autowired
     private PostRepository postRepository;
 
     @Override
-    public JsonMsg addPost(String category, String login, Book book) {
-/*        if(book.getId()==null){
-            Book newBook = bookService.addBook(book);
-            for(Category c : categoryService.getAllCategories()){
-                if(c.getName().equals(category)){
-                    //Post p = new Post(c,login,newBook);
-                }
-            }
-        }*/
-        return null;
+    public Message addPost(PostModel postModel,String login) {
+        Category category = categoryService.getCategory(postModel.getCategoryId());
+        Book book = bookService.getBookById(postModel.getBookId());
+        String terms = postModel.getTerms();
+        User user = userService.findUserByLogin(login);
+        Post post = new Post(category,book,user,terms);
+        postRepository.save(post);
+        return new Message("New Post is created");
     }
 
     @Override
-    public Post getPost(Long id) {
-        return null;
+    public Post getPostById(Long id) {
+        return postRepository.getOne(id);
     }
 
     @Override
-    public List<Post> getAllposts() {
+    public List<Post> getAllPosts() {
         return postRepository.findAll();
     }
 
     @Override
-    public JsonMsg updatePost(Post post) {
-        return null;
-    }
-
-    @Override
-    public JsonMsg deletePost(Long id) {
-        return null;
+    public Message deletePost(Long id) {
+        Post post = postRepository.getOne(id);
+        postRepository.delete(post);
+        return new Message("Post is removed");
     }
 }

@@ -86,4 +86,14 @@ public class UserServiceImpl implements UserService {
         }
         return new Message("User with id "+ id + " does not exist");
     }
+
+    @Override
+    public User findUserByLogin(String login) {
+        for(User u: userRepository.findAll()){
+            if(u.getLogin().equals(login)){
+                return u;
+            }
+        }
+        return null;
+    }
 }

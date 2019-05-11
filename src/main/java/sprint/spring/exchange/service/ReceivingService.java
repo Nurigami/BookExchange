@@ -1,8 +1,8 @@
 package sprint.spring.exchange.service;
 
 import sprint.spring.exchange.entity.Post;
-import sprint.spring.exchange.model.JsonMsg;
+import sprint.spring.exchange.model.RecMessage;
 
 public interface ReceivingService {
-    JsonMsg receiveItem(Post post, String recLogin);
+    RecMessage receiveItem(Post post, String recLogin);
 }

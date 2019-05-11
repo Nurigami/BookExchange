@@ -2,14 +2,15 @@ package sprint.spring.exchange.service;
 
 import sprint.spring.exchange.entity.Book;
 import sprint.spring.exchange.entity.Post;
-import sprint.spring.exchange.model.JsonMsg;
+import sprint.spring.exchange.model.Message;
+import sprint.spring.exchange.model.PostModel;
 
 import java.util.List;
 
 public interface PostService {
-    JsonMsg addPost(String category, String login, Book book);
-    Post getPost(Long id);
-    List<Post> getAllposts();
-    JsonMsg updatePost(Post post);
-    JsonMsg deletePost(Long id);
+    Message addPost(PostModel postModel, String login);
+    Post getPostById(Long id);
+    List<Post> getAllPosts();
+    //Message updatePost(PostModel postModel);
+    Message deletePost(Long id);
 }

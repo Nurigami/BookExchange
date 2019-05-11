@@ -1,17 +1,10 @@
 package sprint.spring.exchange.model;
 
-public class JsonMsg {
+public class RecMessage {
     private String message;
     private String login;
 
-    public JsonMsg() {
-    }
-
-    public JsonMsg(String message) {
-        this.message = message;
-    }
-
-    public JsonMsg(String message, String login) {
+    public RecMessage(String message, String login) {
         this.message = message;
         this.login = login;
     }

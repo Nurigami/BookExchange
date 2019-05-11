@@ -12,10 +12,10 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     private String terms;
@@ -24,10 +24,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(Category category, Book book, User user) {
+    public Post(Category category, Book book, User user, String terms) {
         this.category = category;
         this.book = book;
         this.user = user;
+        this.terms = terms;
         this.datePosted = LocalDateTime.now();
     }
 
@@ -61,6 +62,14 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getTerms() {
+        return terms;
+    }
+
+    public void setTerms(String terms) {
+        this.terms = terms;
     }
 
     public LocalDateTime getDatePosted() {

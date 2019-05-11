@@ -3,7 +3,7 @@ package sprint.spring.exchange.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sprint.spring.exchange.entity.Category;
-import sprint.spring.exchange.model.JsonMsg;
+import sprint.spring.exchange.model.Message;
 import sprint.spring.exchange.repository.CategoryRepository;
 
 import java.util.List;
@@ -14,9 +14,9 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public JsonMsg addCategory(Category category) {
+    public Message addCategory(Category category) {
         categoryRepository.save(category);
-        return null;
+        return new Message("New category is saved");
     }
 
     @Override
@@ -33,25 +33,25 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public JsonMsg updateCategory(Category category) {
+    public Message updateCategory(Category category) {
         for(Category c: categoryRepository.findAll()){
             if(c.getId().equals(category.getId())){
                 c.setName(category.getName());
                 categoryRepository.save(c);
-                return new JsonMsg("Category is updated");
+                return new Message("Category is updated");
             }
         }
-        return new JsonMsg("Category with id " + category.getId() + " does not exist");
+        return new Message("Category with id " + category.getId() + " does not exist");
     }
 
     @Override
-    public JsonMsg deleteCategory(Long id) {
+    public Message deleteCategory(Long id) {
         for(Category c: categoryRepository.findAll()){
             if(c.getId().equals(id)){
                 categoryRepository.delete(c);
-                return new JsonMsg("Category is removed");
+                return new Message("Category is removed");
             }
         }
-        return new JsonMsg("Category with id " + id + " does not exist");
+        return new Message("Category with id " + id + " does not exist");
     }
 }

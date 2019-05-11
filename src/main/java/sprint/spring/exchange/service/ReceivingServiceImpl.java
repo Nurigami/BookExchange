@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sprint.spring.exchange.entity.Receiving;
 import sprint.spring.exchange.entity.Post;
-import sprint.spring.exchange.model.JsonMsg;
+import sprint.spring.exchange.model.RecMessage;
 import sprint.spring.exchange.repository.ReceivingRepository;
 import sprint.spring.exchange.repository.PostRepository;
 
@@ -16,14 +16,14 @@ public class ReceivingServiceImpl implements ReceivingService {
     private PostRepository postRepository;
 
     @Override
-    public JsonMsg receiveItem(Post post, String recLogin) {
+    public RecMessage receiveItem(Post post, String recLogin) {
         if(recLogin!=null){
             Receiving journal = new Receiving(post,recLogin);
             journalRepository.save(journal);
             postRepository.delete(post);
-            return new JsonMsg("Please contact the owner to receive the book. Link to the book owner's contacts is below ",
+            return new RecMessage("Please contact the owner to receive the book. Link to the book owner's contacts is below ",
                     post.getUser().getLogin());
         }
-        return new JsonMsg("Please sign in.");
+        return new RecMessage("Please sign in.",null);
     }
 }

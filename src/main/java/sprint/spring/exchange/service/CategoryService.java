@@ -1,14 +1,14 @@
 package sprint.spring.exchange.service;
 
 import sprint.spring.exchange.entity.Category;
-import sprint.spring.exchange.model.JsonMsg;
+import sprint.spring.exchange.model.Message;
 
 import java.util.List;
 
 public interface CategoryService {
-    JsonMsg addCategory(Category category);
+    Message addCategory(Category category);
     List<Category> getAllCategories();
     Category getCategory(Long id);
-    JsonMsg updateCategory(Category category);
-    JsonMsg deleteCategory(Long id);
+    Message updateCategory(Category category);
+    Message deleteCategory(Long id);
 }

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sprint.spring.exchange.entity.Post;
-import sprint.spring.exchange.model.JsonMsg;
+import sprint.spring.exchange.model.RecMessage;
 import sprint.spring.exchange.service.ReceivingService;
 
 @RestController
@@ -16,7 +16,7 @@ public class ReceivingController {
     private ReceivingService receivingService;
 
     @PostMapping
-    public ResponseEntity<JsonMsg> receiveItem(@RequestBody Post post, @RequestHeader(required = false) String recLogin){
+    public ResponseEntity<RecMessage> receiveItem(@RequestBody Post post, @RequestHeader(required = false) String recLogin){
         return new ResponseEntity<>(receivingService.receiveItem(post,recLogin), HttpStatus.OK);
     }
 }

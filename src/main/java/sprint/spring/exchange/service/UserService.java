@@ -13,4 +13,5 @@ public interface UserService {
     Message updateUser(User user);
     Message blockUser(Long id);
     Message unblockUser(Long id);
+    User findUserByLogin(String login);
 }
