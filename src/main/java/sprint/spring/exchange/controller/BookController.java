@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sprint.spring.exchange.entity.Book;
+import sprint.spring.exchange.model.Message;
 import sprint.spring.exchange.service.BookService;
 
 
@@ -15,32 +16,30 @@ import java.util.List;
 public class BookController {
     @Autowired
     private BookService bookService;
-    //лишние пути я убрала, так неудобно будет самим ориентироваться
-    //оберни плз все ответы в респонсэнтити, в эддбук в респонсэтити еще локейшн нужно создать
+
     @PostMapping
-    public Book addBook(@RequestBody Book book) {
-        return bookService.addBook(book);
-    }
-
-    @DeleteMapping("/{id}")
-    public void removeBook(@PathVariable Long id) {
-        bookService.removeBook(id);
-    }
-
-    @PutMapping
-    public ResponseEntity<?> updateBook(@RequestBody Book book) {
-        Book currentBook = bookService.changeBook(book);
-        return new ResponseEntity<Book>(currentBook, HttpStatus.OK);
-    }
-
-    @GetMapping
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+    public ResponseEntity<Message> addBook(@RequestBody Book book) {
+        return new ResponseEntity<>(bookService.addBook(book),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Book getBookById(@PathVariable Long id) {
-        return bookService.getBookById(id);
+    public ResponseEntity<Book> getBookById(@PathVariable Long id){
+        return new ResponseEntity<>(bookService.getBookById(id),HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Book>> getBooks(){
+        return new ResponseEntity<>(bookService.getAllBooks(),HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<Message> updateBook(@RequestBody Book book){
+        return new ResponseEntity<>(bookService.updateBook(book),HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Message> deleteBook(@PathVariable Long id){
+        return new ResponseEntity<>(bookService.deleteBook(id),HttpStatus.OK);
     }
 
 }

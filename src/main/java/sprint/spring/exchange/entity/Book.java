@@ -11,20 +11,14 @@ public class Book {
     private String name;
     private String description;
     private String author;
-    private String terms;
-    private String login;
-    private Boolean isBooked;
 
     public Book() {
     }
 
-    public Book(String name, String description, String author, String terms, String login, Boolean isBooked) {
+    public Book(String name, String description, String author) {
         this.name = name;
         this.description = description;
         this.author = author;
-        this.terms = terms;
-        this.login = login;
-        this.isBooked = isBooked;
     }
 
     public Long getId() {
@@ -57,29 +51,5 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getTerms() {
-        return terms;
-    }
-
-    public void setTerms(String terms) {
-        this.terms = terms;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public Boolean getBooked() {
-        return isBooked;
-    }
-
-    public void setBooked(Boolean booked) {
-        isBooked = booked;
     }
 }

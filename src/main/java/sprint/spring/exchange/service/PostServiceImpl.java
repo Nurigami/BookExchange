@@ -22,14 +22,14 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public JsonMsg addPost(String category, String login, Book book) {
-        if(book.getId()==null){
+/*        if(book.getId()==null){
             Book newBook = bookService.addBook(book);
             for(Category c : categoryService.getAllCategories()){
                 if(c.getName().equals(category)){
                     //Post p = new Post(c,login,newBook);
                 }
             }
-        }
+        }*/
         return null;
     }
 

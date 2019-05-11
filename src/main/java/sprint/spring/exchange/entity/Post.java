@@ -18,6 +18,7 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+    private String terms;
     private LocalDateTime datePosted;
 
     public Post() {
