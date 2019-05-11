@@ -1,5 +1,7 @@
 package sprint.spring.exchange.entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,37 +10,28 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name="email")
-    private String email;
-    @Column(name="fio",nullable = false)
     private String fio;
-    @Column(name="login", nullable = false, unique = true)
     private String login;
-    @Column(name="password",nullable = false)
     private String password;
-    @Column(name="phone")
+    private String email;
     private String phone;
-    @Column(name="is_active")
-    private boolean isActive;
+    private String address;
+    @Column(name = "is_active", columnDefinition = "boolean default true")
+    private Boolean isActive;
 
     public User() {
     }
 
-    public User(String email,String fio, String login, String password,  String phone,boolean isActive) {
+    public User(String fio, String login, String password, String email,
+                String phone, String address, Boolean isActive) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.fio = fio;
         this.login = login;
-        this.password = password;
+        this.password = passwordEncoder.encode(password);
         this.email = email;
         this.phone = phone;
-        this.isActive=isActive;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
+        this.address = address;
+        this.isActive = isActive;
     }
 
     public Long getId() {
@@ -70,7 +63,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 
     public String getEmail() {
@@ -89,4 +83,19 @@ public class User {
         this.phone = phone;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
 }

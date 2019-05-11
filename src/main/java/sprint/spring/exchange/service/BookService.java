@@ -6,21 +6,9 @@ import sprint.spring.exchange.model.Message;
 import java.util.List;
 
 public interface BookService {
-    Book addBook(Book book);
-
-    void removeBook(Long id);
-
-    Book changeBook(Book book);
-
-    List<Book> getAllBooks();
-
+    Message addBook(Book book);
     Book getBookById(Long id);
-
-    Message changeBook2(Book book);
-
-    Boolean isBookExist(Long id);
-
-    List <Book> getBooksByName(String name);
-
-    List<Book>getBooksByAuthor(String author);
+    List<Book> getAllBooks();
+    Message updateBook(Book book);
+    Message deleteBook(Long id);
 }

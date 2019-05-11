@@ -14,23 +14,19 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
 
     @Override
-    public Book addBook(Book book) {
-        return bookRepository.save(book);
+    public Message addBook(Book book) {
+        bookRepository.save(book);
+        return new Message("Book was saved.");
     }
 
     @Override
-    public void removeBook(Long id) {
-        bookRepository.deleteById(id);
-    }
-
-    @Override
-    public Book changeBook(Book book) {
-        Book bookUpdate = bookRepository.findById(book.getId()).get();
-        //логика апдейта должна прописываться здесь
-        //здесь дополнительно айди не стоит передавать в параметрах, я его удалила
-        //сделай плз проверку на нул здесь и в гетБайАйди, если его ловит то сообщение типа "такого айди не существует",
-        //и это сообщение нужно в модельке возвращать, а не просто строкой и на уровне контролера его засунуть в респонсэнтити
-        return bookRepository.save(bookUpdate);
+    public Book getBookById(Long id) {
+        for(Book b : bookRepository.findAll()){
+            if(b.getId().equals(id)){
+                return b;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -39,33 +35,27 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBookById(Long id) {
-
-        return bookRepository.findById(id).get();
-    }
-
-    @Override
-    public Boolean isBookExist(Long id) {
-        if(getBookById(id) != null) return true;
-        return false;
-    }
-
-    @Override
-    public List<Book> getBooksByAuthor(String author) {
-        return bookRepository.findBooksByAuthor(author);
-    }
-    @Override
-    public List<Book> getBooksByName(String name) {
-        return bookRepository.findBooksByName(name);
-    }
-
-    @Override
-    public Message changeBook2(Book book) {
-        Message msg=new Message("Book has been changed");
-        if(!(isBookExist(book.getId()))){
-            msg.setMessage("Not found");
-            return msg;
+    public Message updateBook(Book book) {
+        for(Book b : bookRepository.findAll()){
+            if(b.getId().equals(book.getId())){
+                b.setName(book.getName());
+                b.setAuthor(book.getAuthor());
+                b.setDescription(book.getDescription());
+                bookRepository.save(b);
+                return new Message("Book is updated");
+            }
         }
-        return msg;
+        return new Message("Book with id " + book.getId()+ " does not exist");
+    }
+
+    @Override
+    public Message deleteBook(Long id) {
+        for(Book b : bookRepository.findAll()){
+            if(b.getId().equals(id)){
+                bookRepository.delete(b);
+                return new Message("Book is removed");
+            }
+        }
+        return new Message("Book with id " + id + " does not exist");
     }
 }

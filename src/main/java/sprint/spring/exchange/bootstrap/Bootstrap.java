@@ -4,54 +4,55 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import sprint.spring.exchange.entity.Book;
-import sprint.spring.exchange.entity.User;
-import sprint.spring.exchange.entity.UserRoles;
-import sprint.spring.exchange.repository.BookRepository;
-import sprint.spring.exchange.repository.JournalRepository;
-import sprint.spring.exchange.repository.UserRepository;
-import sprint.spring.exchange.repository.UserRolesRepository;
+import sprint.spring.exchange.entity.*;
+import sprint.spring.exchange.repository.*;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
     @Autowired
-    private JournalRepository journalRepository;
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
+    private ReceivingRepository journalRepository;
+    @Autowired
+    private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private UserRolesRepository userRolesRepository;
 
-    @Autowired
-    private BookRepository bookRepository;
     @Override
     public void run(String... args) throws Exception {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    /*    User user1 = new User("user1","user1","user1",
-                passwordEncoder.encode("user1"),"user1",true);
-        userRepository.save(user1);
+/*        Category c1 = new Category("book");
+        Category c2 = new Category("other");
+        categoryRepository.save(c1);
+        categoryRepository.save(c2);*/
 
-        User user2 = new User("user2","user2", "user2",
-                passwordEncoder.encode("user2"),"user2",true);
-        userRepository.save(user2);
+/*        Book b1 = new Book("name","desc","author");
+        Book b2 = new Book("name2","desc2","author");
+        bookRepository.save(b1);
+        bookRepository.save(b2);*/
 
-        User user3 = new User("user3","user3","user3",
-                passwordEncoder.encode("user3"),"user3",false);
-        userRepository.save(user3);
+/*        Receiving j1 = new Receiving(c1,b1.getLogin(),null,b1,"userReceiver");
+        Receiving j2 = new Receiving(c1,b2.getLogin(),null,b2,"userReceiver");
+        journalRepository.save(j1);
+        journalRepository.save(j2);
+        User u1 = new User("fio","log","pass","email","phone","address");
+        userRepository.save(u1);
+        Post p1 = new Post(c1,b1,u1);
+        postRepository.save(p1);*/
 
-        UserRoles userRoles1 = new UserRoles(user1, "ROLE_ADMIN");
-        userRolesRepository.save(userRoles1);
+/*        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        UserRoles userRoles2 = new UserRoles(user2, "ROLE_USER");
-        userRolesRepository.save(userRoles2);
-
-        UserRoles userRoles3 = new UserRoles(user3, "ROLE_USER");
-        userRolesRepository.save(userRoles3);*/
-
-    Book book=new Book("book1","Drama","Pushkin","333","user1",false);
-    Book book2=new Book("book1","Drama","Pushkin","333","user1",false);
-    Book book3=new Book("book2","Drama","Duma","333","user1",false);
-    bookRepository.save(book);
-    bookRepository.save(book3);
-    bookRepository.save(book2);
+        User u1 = new User("fio","use",passwordEncoder.encode("123"),"email","phone","address",true);
+        User u2 = new User("fio","use",passwordEncoder.encode("456"),"email","phone","address",false);
+        User u3 = new User("fio","adm",passwordEncoder.encode("789"),"email","phone","address",true);
+        userRepository.save(u1);
+        userRepository.save(u2);
+        UserRoles ur1 = new UserRoles(u1,"ROLE_USER");
+        UserRoles ur2 = new UserRoles(u2,"ROLE_ADMIN");
+        userRolesRepository.save(ur1);
+        userRolesRepository.save(ur2);*/
     }
 }
