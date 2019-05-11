@@ -58,4 +58,9 @@ public class BookServiceImpl implements BookService {
         }
         return new Message("Book with id " + id + " does not exist");
     }
+    @Override
+    public List<Book> getBooksByNameAndAuthor(String name, String author) {
+        return bookRepository.findBooksByNameAndAuthor(name, author);
+    }
+
 }

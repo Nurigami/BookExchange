@@ -42,15 +42,10 @@ public class BookController {
         return new ResponseEntity<>(bookService.deleteBook(id),HttpStatus.OK);
     }
 
-    @GetMapping("/{author}")
-    public List<Book> getBooksByAuthor(@PathVariable String author) {
+    @GetMapping("/search")
+    public ResponseEntity <List<Book>> getBooksByNameAndAuthor(@RequestHeader(required = false) String name,
+                                                               @RequestHeader (required = false) String author) {
 
-        return bookService.getBooksByAuthor(author);
-    }
-    @GetMapping("/{name}")
-
-    public List<Book> getBooksByName(@PathVariable String name) {
-
-        return bookService.getBooksByName(name);
+        return new ResponseEntity< >(bookService.getBooksByNameAndAuthor(name,author),HttpStatus.OK);
     }
 }
