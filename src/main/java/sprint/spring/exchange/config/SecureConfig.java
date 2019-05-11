@@ -29,6 +29,8 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/exchange/book").permitAll()
                 .antMatchers("/exchange/post").permitAll()
+                .antMatchers("/exchange/user").permitAll()
+                .antMatchers("/exchange/user/admin/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/admin")
                 .access("hasRole('ADMIN')")
                 .antMatchers(HttpMethod.GET, "/user")

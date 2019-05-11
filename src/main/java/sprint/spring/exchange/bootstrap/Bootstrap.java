@@ -28,30 +28,31 @@ public class Bootstrap implements CommandLineRunner {
         Category c2 = new Category("other");
         categoryRepository.save(c1);
         categoryRepository.save(c2);*/
-        Book b1 = new Book("name","desc","author");
+
+/*        Book b1 = new Book("name","desc","author");
         Book b2 = new Book("name2","desc2","author");
         bookRepository.save(b1);
-        bookRepository.save(b2);
-/*
-        Receiving j1 = new Receiving(c1,b1.getLogin(),null,b1,"userReceiver");
+        bookRepository.save(b2);*/
+
+/*        Receiving j1 = new Receiving(c1,b1.getLogin(),null,b1,"userReceiver");
         Receiving j2 = new Receiving(c1,b2.getLogin(),null,b2,"userReceiver");
         journalRepository.save(j1);
         journalRepository.save(j2);
         User u1 = new User("fio","log","pass","email","phone","address");
         userRepository.save(u1);
         Post p1 = new Post(c1,b1,u1);
-        postRepository.save(p1);
+        postRepository.save(p1);*/
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+/*        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-        User u1 = new User("fio","user2",passwordEncoder.encode("123"),"email","phone","address",true);
-        User u2 = new User("fio","admin2",passwordEncoder.encode("456"),"email","phone","address",true);
+        User u1 = new User("fio","use",passwordEncoder.encode("123"),"email","phone","address",true);
+        User u2 = new User("fio","use",passwordEncoder.encode("456"),"email","phone","address",false);
+        User u3 = new User("fio","adm",passwordEncoder.encode("789"),"email","phone","address",true);
         userRepository.save(u1);
         userRepository.save(u2);
         UserRoles ur1 = new UserRoles(u1,"ROLE_USER");
         UserRoles ur2 = new UserRoles(u2,"ROLE_ADMIN");
         userRolesRepository.save(ur1);
-        userRolesRepository.save(ur2);
-*/
+        userRolesRepository.save(ur2);*/
     }
 }

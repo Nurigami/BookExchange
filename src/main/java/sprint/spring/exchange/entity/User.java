@@ -1,5 +1,7 @@
 package sprint.spring.exchange.entity;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,9 +24,10 @@ public class User {
 
     public User(String fio, String login, String password, String email,
                 String phone, String address, Boolean isActive) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.fio = fio;
         this.login = login;
-        this.password = password;
+        this.password = passwordEncoder.encode(password);
         this.email = email;
         this.phone = phone;
         this.address = address;
@@ -60,7 +63,8 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 
     public String getEmail() {
