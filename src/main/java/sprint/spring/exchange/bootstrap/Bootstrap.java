@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import sprint.spring.exchange.entity.Book;
 import sprint.spring.exchange.entity.User;
 import sprint.spring.exchange.entity.UserRoles;
+import sprint.spring.exchange.repository.BookRepository;
 import sprint.spring.exchange.repository.JournalRepository;
 import sprint.spring.exchange.repository.UserRepository;
 import sprint.spring.exchange.repository.UserRolesRepository;
@@ -19,6 +21,8 @@ public class Bootstrap implements CommandLineRunner {
     @Autowired
     private UserRolesRepository userRolesRepository;
 
+    @Autowired
+    private BookRepository bookRepository;
     @Override
     public void run(String... args) throws Exception {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -42,5 +46,12 @@ public class Bootstrap implements CommandLineRunner {
 
         UserRoles userRoles3 = new UserRoles(user3, "ROLE_USER");
         userRolesRepository.save(userRoles3);*/
+
+    Book book=new Book("book1","Drama","Pushkin","333","user1",false);
+    Book book2=new Book("book1","Drama","Pushkin","333","user1",false);
+    Book book3=new Book("book2","Drama","Duma","333","user1",false);
+    bookRepository.save(book);
+    bookRepository.save(book3);
+    bookRepository.save(book2);
     }
 }

@@ -3,6 +3,7 @@ package sprint.spring.exchange.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sprint.spring.exchange.entity.Book;
+import sprint.spring.exchange.model.Message;
 import sprint.spring.exchange.repository.BookRepository;
 
 import java.util.List;
@@ -40,5 +41,30 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getBookById(Long id) {
         return bookRepository.findById(id).get();
+    }
+
+    @Override
+    public Boolean isBookExist(Long id) {
+        if(bookRepository.findBookById(id) != null) return true;
+        return false;
+    }
+
+    @Override
+    public List<Book> getBooksByAuthor(String author) {
+        return bookRepository.findBooksByAuthor(author);
+    }
+    @Override
+    public List<Book> getBooksByName(String name) {
+        return bookRepository.findBooksByName(name);
+    }
+
+    @Override
+    public Message changeBook2(Book book) {
+        Message msg=new Message("Book has been changed");
+        if(!(isBookExist(book.getId()))){
+            msg.setMessage("Not found");
+            return msg;
+        }
+        return msg;
     }
 }

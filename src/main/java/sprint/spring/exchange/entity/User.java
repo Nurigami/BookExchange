@@ -10,11 +10,11 @@ public class User {
     private Long id;
     @Column(name="email")
     private String email;
-    @Column(name="fio")
+    @Column(name="fio",nullable = false)
     private String fio;
-    @Column(name="login")
+    @Column(name="login", nullable = false, unique = true)
     private String login;
-    @Column(name="password")
+    @Column(name="password",nullable = false)
     private String password;
     @Column(name="phone")
     private String phone;
