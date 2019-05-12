@@ -8,6 +8,7 @@ import sprint.spring.exchange.entity.User;
 import sprint.spring.exchange.model.Message;
 import sprint.spring.exchange.service.UserService;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("/all")
     public ResponseEntity<Message> addUser(@RequestBody User user){
         return new ResponseEntity<>(userService.addUser(user), HttpStatus.OK);
     }
@@ -36,7 +37,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllUsers(),HttpStatus.OK);
     }
 
-    @PutMapping
+    @PutMapping("/user/update")
     public ResponseEntity<Message> updateUser(@RequestBody User user){
         return new ResponseEntity<>(userService.updateUser(user),HttpStatus.OK);
     }
@@ -49,6 +50,11 @@ public class UserController {
     @PutMapping("/admin/unblock/{id}")
     public ResponseEntity<Message> unblockUser(@PathVariable Long id){
         return new ResponseEntity<>(userService.unblockUser(id),HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<User> findUserByLogin(@RequestHeader String login){
+        return new ResponseEntity<>(userService.findUserByLogin(login),HttpStatus.OK);
     }
 
 }

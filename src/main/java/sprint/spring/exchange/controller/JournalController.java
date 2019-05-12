@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import sprint.spring.exchange.model.Message;
 import sprint.spring.exchange.service.JournalService;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("exchange/receive")
 public class JournalController {
@@ -14,7 +16,7 @@ public class JournalController {
     private JournalService journalService;
 
     @PostMapping("/{postId}")
-    public ResponseEntity<Message> receiveItem(@PathVariable Long postId, @RequestHeader(required = false) String recLogin){
-        return new ResponseEntity<>(journalService.receiveItem(postId,recLogin), HttpStatus.OK);
+    public ResponseEntity<Message> receiveItem(@PathVariable Long postId, Principal principal){
+        return new ResponseEntity<>(journalService.receiveItem(postId,principal.getName()), HttpStatus.OK);
     }
 }

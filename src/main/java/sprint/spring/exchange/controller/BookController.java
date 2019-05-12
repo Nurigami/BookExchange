@@ -17,37 +17,36 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @PostMapping
+    @PostMapping("/user")
     public ResponseEntity<Message> addBook(@RequestBody Book book) {
         return new ResponseEntity<>(bookService.addBook(book),HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/admin/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id){
         return new ResponseEntity<>(bookService.getBookById(id),HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Book>> getBooks(){
+    @GetMapping("/admin")
+    public ResponseEntity<List<Book>> getAllBooks(){
         return new ResponseEntity<>(bookService.getAllBooks(),HttpStatus.OK);
     }
 
-    @PutMapping
+    @PutMapping("/user")
     public ResponseEntity<Message> updateBook(@RequestBody Book book){
         return new ResponseEntity<>(bookService.updateBook(book),HttpStatus.OK);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/all/search")
     public ResponseEntity <List<Book>> getBooksByNameAndAuthor(@RequestHeader(required = false) String name,
                                                                @RequestHeader (required = false) String author) {
 
         return new ResponseEntity< >(bookService.getBooksByNameAndAuthor(name,author),HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public ResponseEntity<Message> deleteBook(@PathVariable Long id){
         return new ResponseEntity<>(bookService.deleteBook(id),HttpStatus.OK);
     }
-
 
 }

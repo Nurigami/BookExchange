@@ -18,7 +18,7 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @PostMapping
+    @PostMapping("/user")
     public ResponseEntity<Message> addPost(@RequestBody PostModel postModel, Principal principal){
         if(principal!=null){
             return new ResponseEntity<>(postService.addPost(postModel,principal.getName()),HttpStatus.OK);
@@ -31,7 +31,7 @@ public class PostController {
         return new ResponseEntity<>(postService.getPostById(id),HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Post>> getAllPosts(){
         return new ResponseEntity<>(postService.getAllPosts(),HttpStatus.OK);
     }
@@ -41,7 +41,7 @@ public class PostController {
         return new ResponseEntity<>(postService.deletePost(id),HttpStatus.OK);
     }
 
-    @PutMapping
+    @PutMapping("/user")
     public ResponseEntity<Message> updatePost(@RequestBody Post post){
         return new ResponseEntity<>(postService.updatePost(post),HttpStatus.OK);
     }
@@ -54,7 +54,7 @@ public class PostController {
         return new ResponseEntity<>(new Message("Please sign in"),HttpStatus.OK);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/all/search")
     public ResponseEntity<List<Post>> getPostsByBookNameAuthor(@RequestHeader(required = false) String author,
                                                                @RequestHeader (required = false) String bookName){
         return new ResponseEntity<>(postService.getPostsByBookNameAuthor(author,bookName),HttpStatus.OK);

@@ -1,6 +1,5 @@
 package sprint.spring.exchange.config;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,18 +26,17 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/exchange/book").permitAll()
-                .antMatchers("/exchange/post").permitAll()
-                .antMatchers("/exchange/user").permitAll()
                 .antMatchers("/exchange/ranking").permitAll()
-                .antMatchers("/exchange/receive/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/exchange/user/all/**").permitAll()
                 .antMatchers("/exchange/user/admin/**").hasRole("ADMIN")
-                .antMatchers("/exchange/book/search").permitAll()
-                .antMatchers("/exchange/post/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/admin")
-                .access("hasRole('ADMIN')")
-                .antMatchers(HttpMethod.GET, "/user")
-                .access("hasRole('USER')")
+                .antMatchers("/exchange/user/user/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/exchange/book/all/**").permitAll()
+                .antMatchers("/exchange/book/user/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/exchange/book/admin/**").hasRole("ADMIN")
+                .antMatchers("/exchange/post/all/**").permitAll()
+                .antMatchers("/exchange/post/user/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/exchange/post/admin/**").hasRole("ADMIN")
+                .antMatchers("/exchange/receive/**").hasAnyRole("USER","ADMIN")
                 .and()
                 .httpBasic()
                 .and().logout().and().formLogin();
