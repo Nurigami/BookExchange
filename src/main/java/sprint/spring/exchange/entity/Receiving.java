@@ -27,7 +27,7 @@ public class Receiving {
 
     public Receiving(Post post, String recLogin){
         this.category = post.getCategory();
-        this.login = post.getUser().getLogin();
+        this.login = post.getUserLogin();
         this.datePosted = post.getDatePosted();
         this.book = post.getBook();
         this.recLogin = recLogin;

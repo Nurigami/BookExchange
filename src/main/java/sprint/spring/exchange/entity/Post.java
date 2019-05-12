@@ -9,25 +9,28 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
-    @ManyToOne(fetch = FetchType.LAZY)
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user;*/
+    private String userLogin;
     private String terms;
     private LocalDateTime datePosted;
 
     public Post() {
     }
 
-    public Post(Category category, Book book, User user) {
+    public Post(Category category, Book book, String userLogin) {
         this.category = category;
         this.book = book;
-        this.user = user;
+        this.userLogin=userLogin;
         this.datePosted = LocalDateTime.now();
     }
 
@@ -55,12 +58,20 @@ public class Post {
         this.book = book;
     }
 
-    public User getUser() {
-        return user;
+    public String getUserLogin() {
+        return userLogin;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
+    public String getTerms() {
+        return terms;
+    }
+
+    public void setTerms(String terms) {
+        this.terms = terms;
     }
 
     public LocalDateTime getDatePosted() {

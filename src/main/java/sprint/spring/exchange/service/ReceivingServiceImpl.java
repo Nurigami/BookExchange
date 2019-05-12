@@ -22,7 +22,7 @@ public class ReceivingServiceImpl implements ReceivingService {
             journalRepository.save(journal);
             postRepository.delete(post);
             return new JsonMsg("Please contact the owner to receive the book. Link to the book owner's contacts is below ",
-                    post.getUser().getLogin());
+                    post.getUserLogin());
         }
         return new JsonMsg("Please sign in.");
     }
