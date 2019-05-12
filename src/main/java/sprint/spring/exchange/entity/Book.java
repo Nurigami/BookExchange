@@ -1,7 +1,6 @@
 package sprint.spring.exchange.entity;
 
 import javax.persistence.*;
-
 @Entity
 @Table(name = "z_book")
 public class Book {

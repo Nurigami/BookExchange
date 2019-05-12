@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "z_journal")
-public class Receiving {
+public class Journal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -22,19 +22,19 @@ public class Receiving {
     private String recLogin;
     private LocalDateTime dateBooked;
 
-    public Receiving() {
+    public Journal() {
     }
 
-    public Receiving(Post post, String recLogin){
+    public Journal(Post post, String recLogin){
         this.category = post.getCategory();
-        this.login = post.getUser().getLogin();
+        this.login = post.getLogin();
         this.datePosted = post.getDatePosted();
         this.book = post.getBook();
         this.recLogin = recLogin;
         this.dateBooked = LocalDateTime.now();
     }
 
-    public Receiving(Category category, String login, LocalDateTime datePosted, Book book, String recLogin) {
+    public Journal(Category category, String login, LocalDateTime datePosted, Book book, String recLogin) {
         this.category = category;
         this.login = login;
         this.datePosted = datePosted;

@@ -28,8 +28,7 @@ public class PostServiceImpl implements PostService {
         Category category = categoryService.getCategory(postModel.getCategoryId());
         Book book = bookService.getBookById(postModel.getBookId());
         String terms = postModel.getTerms();
-        User user = userService.findUserByLogin(login);
-        Post post = new Post(category,book,user,terms);
+        Post post = new Post(category,book,login,terms);
         postRepository.save(post);
         return new Message("New Post is created");
     }
@@ -49,5 +48,31 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.getOne(id);
         postRepository.delete(post);
         return new Message("Post is removed");
+    }
+
+    @Override
+    public Message updatePost(Post post){
+        if(postRepository.findById(post.getId()).orElse(null)!=null){
+            Post p = postRepository.getOne(post.getId());
+            p.setBook(post.getBook());
+            p.setCategory(post.getCategory());
+            p.setLogin(post.getLogin());
+            p.setTerms(post.getTerms());
+            return new Message("Post is updated");
+        }
+        return new Message("Post with id " + post.getId()+ " does not exist");
+    }
+
+    @Override
+    public List<Post> getPostsOfUserByCategory(String login, String category) {
+        return postRepository.getPostsOfUserByCategory(login,category);
+    }
+
+    @Override
+    public List<Post> getPostsByBookNameAuthor(String author, String bookName) {
+        if(author==null && bookName==null) return postRepository.getPostsByBookNameAuthor(author,bookName);
+        if(author==null && bookName!=null) return postRepository.getPostsByBookNameAuthor(author,bookName.toLowerCase());
+        if(author!=null && bookName==null) return postRepository.getPostsByBookNameAuthor(author.toLowerCase(),bookName);
+        return postRepository.getPostsByBookNameAuthor(author.toLowerCase(),bookName.toLowerCase());
     }
 }

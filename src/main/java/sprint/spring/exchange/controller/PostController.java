@@ -41,4 +41,23 @@ public class PostController {
         return new ResponseEntity<>(postService.deletePost(id),HttpStatus.OK);
     }
 
+    @PutMapping
+    public ResponseEntity<Message> updatePost(@RequestBody Post post){
+        return new ResponseEntity<>(postService.updatePost(post),HttpStatus.OK);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<?> getPostsOfUserByCategory(Principal principal, @RequestHeader String category){
+        if(principal!=null){
+            return new ResponseEntity<>(postService.getPostsOfUserByCategory(principal.getName(),category),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new Message("Please sign in"),HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Post>> getPostsByBookNameAuthor(@RequestHeader(required = false) String author,
+                                                               @RequestHeader (required = false) String bookName){
+        return new ResponseEntity<>(postService.getPostsByBookNameAuthor(author,bookName),HttpStatus.OK);
+    }
+
 }

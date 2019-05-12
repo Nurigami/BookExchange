@@ -27,12 +27,14 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-
                 .antMatchers("/exchange/book").permitAll()
                 .antMatchers("/exchange/post").permitAll()
                 .antMatchers("/exchange/user").permitAll()
+                .antMatchers("/exchange/ranking").permitAll()
+                .antMatchers("/exchange/receive/**").hasAnyRole("USER","ADMIN")
                 .antMatchers("/exchange/user/admin/**").hasRole("ADMIN")
                 .antMatchers("/exchange/book/search").permitAll()
+                .antMatchers("/exchange/post/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/admin")
                 .access("hasRole('ADMIN')")
                 .antMatchers(HttpMethod.GET, "/user")
@@ -46,8 +48,8 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery( " select login, password,is_active " +
-                        " from z_user where login=? and is_active=true" ).
+                .usersByUsernameQuery( " select login, password, is_active " +
+                        " from z_user where login=? and is_active=true " ).
                 authoritiesByUsernameQuery( " select u.login, " +
                         "ur.role as role " +
                         "from z_user_roles ur " +

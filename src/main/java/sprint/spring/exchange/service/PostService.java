@@ -11,6 +11,8 @@ public interface PostService {
     Message addPost(PostModel postModel, String login);
     Post getPostById(Long id);
     List<Post> getAllPosts();
-    //Message updatePost(PostModel postModel);
     Message deletePost(Long id);
+    Message updatePost(Post post);
+    List<Post> getPostsOfUserByCategory(String login,String category);
+    List<Post> getPostsByBookNameAuthor(String author,String bookName);
 }

@@ -15,19 +15,17 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String login;
     private String terms;
     private LocalDateTime datePosted;
 
     public Post() {
     }
 
-    public Post(Category category, Book book, User user, String terms) {
+    public Post(Category category, Book book, String login, String terms) {
         this.category = category;
         this.book = book;
-        this.user = user;
+        this.login = login;
         this.terms = terms;
         this.datePosted = LocalDateTime.now();
     }
@@ -56,12 +54,12 @@ public class Post {
         this.book = book;
     }
 
-    public User getUser() {
-        return user;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getTerms() {
