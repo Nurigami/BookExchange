@@ -25,11 +25,11 @@ public class Journal {
     public Journal() {
     }
 
-    public Journal(Post post, String recLogin){
-        this.category = post.getCategory();
-        this.login = post.getLogin();
-        this.datePosted = post.getDatePosted();
-        this.book = post.getBook();
+    public Journal(PostBook postBook, String recLogin){
+        this.category = postBook.getCategory();
+        this.login = postBook.getLogin();
+        this.datePosted = postBook.getDatePosted();
+        this.book = postBook.getBook();
         this.recLogin = recLogin;
         this.dateBooked = LocalDateTime.now();
     }

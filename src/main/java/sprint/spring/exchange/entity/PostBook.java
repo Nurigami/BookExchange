@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "z_post")
-public class Post {
+public class PostBook {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -19,10 +19,10 @@ public class Post {
     private String terms;
     private LocalDateTime datePosted;
 
-    public Post() {
+    public PostBook() {
     }
 
-    public Post(Category category, Book book, String login, String terms) {
+    public PostBook(Category category, Book book, String login, String terms) {
         this.category = category;
         this.book = book;
         this.login = login;

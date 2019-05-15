@@ -2,7 +2,6 @@ package sprint.spring.exchange.bootstrap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import sprint.spring.exchange.entity.*;
 import sprint.spring.exchange.repository.*;
@@ -14,7 +13,7 @@ public class Bootstrap implements CommandLineRunner {
     @Autowired
     private BookRepository bookRepository;
     @Autowired
-    private PostRepository postRepository;
+    private PostBookRepository postBookRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -32,7 +31,6 @@ public class Bootstrap implements CommandLineRunner {
         bookRepository.save(b1);
         bookRepository.save(b2);
 
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User u1 = new User("fio","user1","123","email","phone","address",true);
         User u2 = new User("fio","user2","456","email","phone","address",false);
         User u3 = new User("fio","admin1","789","email","phone","address",true);
@@ -46,9 +44,9 @@ public class Bootstrap implements CommandLineRunner {
         userRolesRepository.save(ur2);
         userRolesRepository.save(ur3);
 
-        Post p1 = new Post(c1,b1,"use","My terms for exchange");
-        Post p2 = new Post(c1,b2,"us","My terms for exchange");
-        postRepository.save(p1);
-        postRepository.save(p2);*/
+        PostBook p1 = new PostBook(c1,b1,"use","My terms for exchange");
+        PostBook p2 = new PostBook(c1,b2,"us","My terms for exchange");
+        postBookRepository.save(p1);
+        postBookRepository.save(p2);*/
     }
 }
