@@ -50,10 +50,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getBooksByNameAndAuthor(String name, String author) {
-        if(name==null && author==null)return bookRepository.findBooksByNameAndAuthor(name,author);
-        if(name!=null && author==null)return bookRepository.findBooksByNameAndAuthor(name.toLowerCase(),author);
-        if(name==null && author!=null)return bookRepository.findBooksByNameAndAuthor(name,author.toLowerCase());
-        return bookRepository.findBooksByNameAndAuthor(name.toLowerCase(), author.toLowerCase());
+            return bookRepository.findBooksByNameAndAuthor(name,author);
     }
     @Override
     public Message deleteBook(Long id) {

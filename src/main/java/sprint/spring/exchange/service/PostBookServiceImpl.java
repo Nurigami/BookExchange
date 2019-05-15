@@ -77,9 +77,6 @@ public class PostBookServiceImpl implements PostBookService {
 
     @Override
     public List<PostBook> getPostsByBookNameAuthor(String author, String bookName) {
-        if(author==null && bookName==null) return postBookRepository.getPostsByBookNameAuthor(author,bookName);
-        if(author==null && bookName!=null) return postBookRepository.getPostsByBookNameAuthor(author,bookName.toLowerCase());
-        if(author!=null && bookName==null) return postBookRepository.getPostsByBookNameAuthor(author.toLowerCase(),bookName);
-        return postBookRepository.getPostsByBookNameAuthor(author.toLowerCase(),bookName.toLowerCase());
+        return postBookRepository.getPostsByBookNameAuthor(author,bookName);
     }
 }

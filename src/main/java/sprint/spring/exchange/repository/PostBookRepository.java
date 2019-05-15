@@ -14,8 +14,8 @@ public interface PostBookRepository extends JpaRepository<PostBook, Long> {
     List<PostBook> getPostsOfUser(@Param("login")String userLogin);
 
     @Query("select p from PostBook p join fetch p.book b " +
-            "where lower(b.author) like coalesce (cast(concat('%',:author,'%')as text),lower(b.author)) and" +
-            " lower(b.name) like coalesce (cast(concat('%',:name,'%')as text),lower(b.name))")
+            "where lower(b.author) like coalesce (lower(cast(concat('%',:author,'%')as text)),lower(b.author)) and" +
+            " lower(b.name) like coalesce (lower(cast(concat('%',:name,'%')as text)),lower(b.name))")
             List <PostBook> getPostsByBookNameAuthor(@Param("author")String author, @Param("name")String bookName);
 
 }

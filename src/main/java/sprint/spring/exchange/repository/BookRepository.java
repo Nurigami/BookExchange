@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Query("SELECT b FROM Book b WHERE lower(b.name) LIKE coalesce(cast(CONCAT('%',:name,'%') as text),lower(b.name)) " +
-            "and lower(b.author) LIKE coalesce(cast(CONCAT('%',:author,'%') as text),lower(b.author))")
+    @Query("SELECT b FROM Book b WHERE lower(b.name) LIKE coalesce(lower(cast(CONCAT('%',:name,'%') as text)),lower(b.name)) " +
+            "and lower(b.author) LIKE coalesce(lower(cast(CONCAT('%',:author,'%') as text)),lower(b.author))")
     List<Book> findBooksByNameAndAuthor(@Param("name") String name,@Param("author") String author);
 }

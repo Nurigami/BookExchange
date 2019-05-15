@@ -21,7 +21,7 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-/*        Category c1 = new Category("book");
+        Category c1 = new Category("book");
         Category c2 = new Category("other");
         categoryRepository.save(c1);
         categoryRepository.save(c2);
@@ -32,8 +32,8 @@ public class Bootstrap implements CommandLineRunner {
         bookRepository.save(b2);
 
         User u1 = new User("fio","user1","123","email","phone","address",true);
-        User u2 = new User("fio","user2","456","email","phone","address",false);
-        User u3 = new User("fio","admin1","789","email","phone","address",true);
+        User u2 = new User("fio","user2","456","email2","phone","address",false);
+        User u3 = new User("fio","admin1","789","email3","phone","address",true);
         userRepository.save(u1);
         userRepository.save(u2);
         userRepository.save(u3);
@@ -47,6 +47,6 @@ public class Bootstrap implements CommandLineRunner {
         PostBook p1 = new PostBook(c1,b1,"use","My terms for exchange");
         PostBook p2 = new PostBook(c1,b2,"us","My terms for exchange");
         postBookRepository.save(p1);
-        postBookRepository.save(p2);*/
+        postBookRepository.save(p2);
     }
 }
